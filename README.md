@@ -6,6 +6,9 @@ This project is our implementation of a raytracer developed in C++. It allows yo
 - [Installation](./documentation/install.md)
 - [Usage](./documentation/usage.md)
 
+Contribution graph of the project:
+<img width="902" alt="image" src="https://github.com/martonroux/raytracer-epitech/assets/113910340/14dc103d-0dc6-4f8d-95a5-0eaed511e179">
+
 ## Sommaire
 
 - [Introduction](#introduction)
