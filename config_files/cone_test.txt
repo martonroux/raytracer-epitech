@@ -1,0 +1,144 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "400";
+            height : "400";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_directional.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            direction : "{ x : 0; y : 0; z : 1; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : -200; z : -200; }";
+        };
+    },
+    {
+        id : "sphere1";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "cone";
+        type : "shapes_cone.so";
+        properties : {
+            height : "100";
+            radius : "100";
+            finite : "true";
+        };
+    },
+    {
+        id : "sphere1_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 100; y : -30; z : 0; }";
+        };
+    },
+    {
+        id : "cone_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -100; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "sphere1_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 40; y : 40; z : 40; }";
+        };
+    },
+    {
+        id : "yellow_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 0; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "1";
+        };
+    },
+    {
+        id : "red_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 0; b : 0; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "1";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "yellow_material";
+                children : (
+                    {
+                        id : "sphere1_translate";
+                        children : (
+                            {
+                                id : "sphere1_scale";
+                                children : (
+                                    { id : "sphere1"; }
+                                );
+                            }
+                        );
+                    },
+                );
+            },
+            {
+                id : "red_material";
+                children : (
+                    {
+                        id : "cone_translate";
+                        children : (
+                            { id : "cone"; }
+                        );
+                    },
+                );
+            }
+        );
+    }
+);
+
+background : (
+    {
+        r : 0;
+        g : 0;
+        b : 0;
+    }
+);
+
+image : (
+    {
+        file : "cone_test.ppm";
+        width : 500;
+        height : 500;
+    }
+);

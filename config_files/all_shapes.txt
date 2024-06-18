@@ -1,0 +1,273 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 0; g : 0; b : 0; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "1500";
+            height : "1500";
+        };
+    },
+    {
+        id : "light1";
+        type : "lights_directional.so";
+        properties : {
+            color : "{ r : 127; g : 127; b : 127; }";
+            direction : "{ x : -0.3; y : 1; z : 1; }";
+        };
+    },
+    {
+        id : "light2";
+        type : "lights_directional.so";
+        properties : {
+            color : "{ r : 127; g : 0; b : 0; }";
+            direction : "{ x : 0.3; y : 1; z : 1; }";
+        };
+    },
+    {
+        id : "light3";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 127; g : 0; b : 127; }";
+        };
+    },
+    {
+        id : "light4";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 0; g : 127; b : 0; }";
+        };
+    },
+    {
+        id : "light3_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -300; y : -500; z : -1000; }";
+        };
+    },
+    {
+        id : "light4_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -100; y : -300; z : -1000; }";
+        };
+    },
+    {
+        id : "plane";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "triangle";
+        type : "shapes_triangle.so";
+        properties : {
+            p1 : "{ x : 0; y : 0; z : 0; }";
+            p2 : "{ x : 100; y : 0; z : 0; }";
+            p3 : "{ x : 100; y : 70; z : 50; }";
+        };
+    },
+    {
+        id : "cylinder";
+        type : "shapes_cylinder.so";
+        properties : {
+        };
+    },
+    {
+        id : "cone_finite";
+        type : "shapes_cone.so";
+        properties : {
+            height : "50";
+            radius : "20";
+            finite : "true";
+        };
+    },
+    {
+        id : "cone_infinite";
+        type : "shapes_cone.so";
+        properties : {
+            height : "50";
+            radius : "20";
+            finite : "false";
+        };
+    },
+    {
+        id : "sphere_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -300; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "triangle_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -100; y : -50; z : 0; }";
+        };
+    },
+    {
+        id : "cone_infinite_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -600; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "cone_finite_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 400; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "plane_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 200; z : 0; }";
+        };
+    },
+    {
+        id : "cylinder_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 200; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "sphere_rotate";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : 0; z : 1.57; }";
+        };
+    },
+    {
+        id : "sphere_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 50; y : 50; z : 50; }";
+        };
+    },
+    {
+        id : "cylinder_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 50; y : 50; z : 50; }";
+        };
+    },
+    {
+        id : "material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 127; g : 127; b : 127; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "0";
+            roughness : "0";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            {
+                id : "camera";
+            },
+            {
+                id : "light1";
+            },
+            {
+                id : "light2";
+            },
+            {
+                id : "light3_translate";
+                children : (
+                    {
+                        id : "light3";
+                    }
+                );
+            },
+            {
+                id : "light4_translate";
+                children : (
+                    {
+                        id : "light4";
+                    }
+                );
+            },
+            {
+                id : "material";
+                children : (
+                    {
+                        id : "plane_translate";
+                        children : (
+                            {
+                                id : "plane";
+                            }
+                        );
+                    },
+                    {
+                        id : "sphere_translate";
+                        children : (
+                            {
+                                id : "sphere_rotate";
+                                children : (
+                                    {
+                                        id : "sphere_scale";
+                                        children : (
+                                            {
+                                                id : "sphere";
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    },
+                    {
+                        id : "triangle_translate";
+                        children : (
+                            {
+                                id : "triangle";
+                            }
+                        );
+                    },
+                    {
+                        id : "cylinder_translate";
+                        children : (
+                            {
+                                id : "cylinder_scale";
+                                children : (
+                                    {
+                                        id : "cylinder";
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+image : (
+    {
+        file : "all_shapes.ppm";
+        width : 500;
+        height : 500;
+    }
+);

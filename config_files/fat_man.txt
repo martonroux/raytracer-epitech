@@ -1,0 +1,115 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 120; g : 120; b : 120; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "1000";
+            height : "1000";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_directional.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            direction : "{ x : 0; y : 0; z : 1; }";
+        };
+    },
+    {
+        id : "fat_man_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 100; y : 100; z : 100; }";
+        };
+    },
+    {
+        id : "fat_man_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 60; z : -400; }";
+        };
+    },
+    {
+        id : "fat_man_rotate";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 2.9; y : 0.4; z : 0; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 50; y : -600; z : -400; }";
+        };
+    },
+    {
+        id : "basic_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "0";
+        };
+    },
+    {
+        id: "fat_man",
+        type: "shapes_object.so",
+        properties: {
+            path: "config_files/obj/piano/piano.obj";
+        }
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "basic_material";
+                children : (
+                    {
+                        id : "fat_man_translate";
+                        children : (
+                            {
+                                id : "fat_man_rotate";
+                                children : (
+                                    {
+                                        id : "fat_man_scale";
+                                        children : (
+                                            { id : "fat_man"; }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+image : (
+    {
+        file : "fat_man.ppm";
+        width : 1000;
+        height : 1000;
+    }
+);

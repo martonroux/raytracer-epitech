@@ -1,0 +1,146 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 0; g : 0; b : 0; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "1000";
+            height : "1000";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : -90; z : 0; }";
+        };
+    },
+    {
+        id : "cube";
+        type : "shapes_sphere.so";
+        properties : {
+            path : "config_files/obj/cube.obj";
+        };
+    },
+    {
+        id : "plane";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "cube_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 100; z : 0; }";
+        };
+    },
+    {
+        id : "plane_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 400; z : 0; }";
+        };
+    },
+    {
+        id : "cube_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 90; y : 90; z : 90; }";
+        };
+    },
+    {
+        id : "texture";
+        type : "materials_texture.so";
+        properties : {
+            texture : "config_files/img.png";
+        };
+    },
+    {
+        id : "chess";
+        type : "materials_chessboard.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "0.5";
+            chess_size : "10";
+            min_chess : "0.5";
+            max_chess : "1";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "texture";
+                children : (
+                    {
+                        id : "cube_translate";
+                        children : (
+                            {
+                                id : "cube_scale";
+                                children : (
+                                    {
+                                        id : "cube";
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            },
+            {
+                id : "chess";
+                children : (
+                    {
+                        id : "plane_translate";
+                        children : (
+                            { id : "plane"; }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+background : (
+    {
+        r : 0;
+        g : 0;
+        b : 0;
+    }
+);
+
+image : (
+    {
+        file : "obj_shadow.ppm";
+        width : 250;
+        height : 250;
+    }
+);

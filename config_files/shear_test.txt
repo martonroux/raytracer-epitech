@@ -1,0 +1,249 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 0; g : 0; b : 0; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "500";
+            height : "500";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 100; z : -150; }";
+        };
+    },
+    {
+        id : "sphere1";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere2";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere3";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere4";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere1_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -100; y : 100; z : 200; }";
+        };
+    },
+    {
+        id : "sphere2_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 100; y : 100; z : 200; }";
+        };
+    },
+    {
+        id : "sphere3_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -100; y : -100; z : 200; }";
+        };
+    },
+    {
+        id : "sphere4_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 100; y : -100; z : 200; }";
+        };
+    },
+    {
+        id : "sphere1_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere2_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere3_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere4_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere3_shear";
+        type : "transformations_shear.so";
+        properties : {
+            x_shear : "{ x : 0; y : -1; z : 0; }";
+        };
+    },
+    {
+        id : "sphere4_shear";
+        type : "transformations_shear.so";
+        properties : {
+            x_shear : "{ x : 0; y : -1; z : 0; }";
+        };
+    },
+    {
+        id : "red_material";
+        type : "materials_perlin.so";
+        properties : {
+            color : "{ r : 255; g : 0; b : 0; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "0";
+            roughness : "0";
+            octaves : "5";
+            persistence : "5";
+            min_perlin : "0.85";
+            max_perlin : "1";
+        };
+    },
+    {
+        id : "blue_material";
+        type : "materials_perlin.so";
+        properties : {
+            color : "{ r : 0; g : 0; b : 255; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "0";
+            roughness : "0";
+            octaves : "5";
+            persistence : "5";
+            min_perlin : "0.85";
+            max_perlin : "1";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "red_material";
+                children : (
+                    {
+                        id : "sphere3_shear";
+                        children : (
+                            {
+                                id : "sphere3_translate";
+                                children : (
+                                    {
+                                        id : "sphere3_scale";
+                                        children : (
+                                            { id : "sphere3"; }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    },
+                    {
+                        id : "sphere4_shear";
+                        children : (
+                            {
+                                id : "sphere4_translate";
+                                children : (
+                                    {
+                                        id : "sphere4_scale";
+                                        children : (
+                                            { id : "sphere4"; }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            },
+            {
+                id : "blue_material";
+                children : (
+                    {
+                        id : "sphere1_translate";
+                        children : (
+                            {
+                                id : "sphere1_scale";
+                                children : (
+                                    { id : "sphere1"; }
+                                );
+                            }
+                        );
+                    },
+                    {
+                        id : "sphere2_translate";
+                        children : (
+                            {
+                                id : "sphere2_scale";
+                                children : (
+                                    { id : "sphere2"; }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+background : (
+    {
+        r : 0;
+        g : 0;
+        b : 0;
+    }
+);
+
+image : (
+    {
+        file : "planets.ppm";
+        width : 1000;
+        height : 1000;
+    }
+);

@@ -1,0 +1,233 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+        };
+    },
+	{
+	    id : "camera";
+	    type : "cameras_base.so";
+	    properties : {
+	        fieldOfView : "75";
+	        width : "700";
+	        height : "700";
+        };
+	},
+	{
+        id : "light";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : -500; z : -200; }";
+        };
+    },
+    {
+        id : "plane1";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "plane2";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "plane3";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "plane4";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere1";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "rotate_plane1";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : 0; z : 1.57; }";
+        };
+    },
+    {
+        id : "rotate_plane2";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : 0; z : 1.57; }";
+        };
+    },
+    {
+        id : "rotate_plane3";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 1.57; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "rotate_plane4";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : 0.2; z : 0; }";
+        };
+    },
+    {
+        id : "translate_plane_left";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -400; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "translate_plane_right";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 100; y : -100; z : 200; }";
+        };
+    },
+    {
+        id : "translate_plane_back";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 0; z : 2000; }";
+        };
+    },
+    {
+        id : "translate_plane_floor";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 300; z : 0; }";
+        };
+    },
+    {
+        id : "translate_sphere1";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 0; z : 150; }";
+        };
+    },
+    {
+        id : "scale_sphere1";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "green_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 0; g : 255; b : 0; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "100";
+        };
+    },
+    {
+        id : "red_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 0; b : 0; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "100";
+        };
+    },
+    {
+        id : "white_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "100";
+        };
+    },
+    {
+        id : "grey_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 180; g : 180; b : 180; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "100";
+        };
+    },
+    {
+        id: "cone1";
+        type: "shapes_cone.so";
+        properties: {
+            height: "400";
+            radius: "60";
+        };
+    },
+    {
+        id: "rotate_cone1";
+        type: "transformations_rotation.so";
+        properties: {
+            rotation: "{ x : 0; y : 0; z : 0; }";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            {
+                id : "camera";
+            },
+            {
+                id : "light_translate";
+                children : (
+                    {
+                        id : "light";
+                    }
+                );
+            },
+            {
+                id : "red_material";
+                children : (
+                    {
+                        id : "translate_plane_right";
+                        children : (
+                            {
+                                id: "rotate_cone1";
+                                children: (
+                                    { id: "cone1"; }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+background : (
+    {
+        r : 0;
+        g : 0;
+        b : 0;
+    }
+);
+
+image : (
+    {
+        file : "italy.ppm";
+        width : 500;
+        height : 500;
+    }
+);

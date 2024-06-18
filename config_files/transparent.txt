@@ -1,0 +1,190 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color: "{ r : 100; g : 100; b : 100; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "400";
+            height : "400";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 150; y : 0; z : 70; }";
+        };
+    },
+    {
+        id : "sphere1";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere2";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "plane";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere1_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 0; z : 210; }";
+        };
+    },
+    {
+        id : "sphere2_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 75; y : 0; z : 60; }";
+        };
+    },
+    {
+        id : "plane_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 200; z : 0; }";
+        };
+    },
+    {
+        id : "sphere1_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 90; y : 90; z : 90; }";
+        };
+    },
+    {
+        id : "sphere2_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 40; y : 40; z : 40; }";
+        };
+    },
+    {
+        id : "red_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 0; b : 0; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "0";
+            roughness : "0";
+        };
+    },
+    {
+        id : "glass_material";
+        type : "materials_glass.so";
+        properties : {
+            color : "{ r : 0; g : 127; b : 0; }";
+            transparency : "1";
+        };
+    },
+    {
+        id : "chess_material";
+        type : "materials_chessboard.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            shadow_quality : "50";
+            ambiant_occlusion : "0";
+            roughness : "1";
+            chess_size : "10";
+            min_chess : "0.2";
+            max_chess : "1";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "glass_material";
+                children : (
+                    {
+                        id : "sphere2_translate";
+                        children : (
+                            {
+                                id : "sphere2_scale";
+                                children : (
+                                    { id : "sphere2"; }
+                                );
+                            }
+                        );
+                    },
+                );
+            },
+            {
+                id : "red_material";
+                children : (
+                    {
+                        id : "sphere1_translate";
+                        children : (
+                            {
+                                id : "sphere1_scale";
+                                children : (
+                                    { id : "sphere1"; }
+                                );
+                            }
+                        );
+                    }
+                );
+            },
+            {
+                id : "chess_material";
+                children : (
+                    {
+                        id : "plane_translate";
+                        children : (
+                            { id : "plane"; }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+background : (
+    {
+        r : 0;
+        g : 0;
+        b : 0;
+    }
+);
+
+image : (
+    {
+        file : "transparent.ppm";
+        width : 2000;
+        height : 2000;
+    }
+);

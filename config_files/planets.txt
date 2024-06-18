@@ -1,0 +1,139 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 0; g : 0; b : 0; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "1000";
+            height : "1000";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            direction : "{ x : 0.2; y : 0; z : 1; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 150; y : 0; z : -300; }";
+        };
+    },
+    {
+        id : "sphere1";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "skybox";
+        type : "shapes_skybox.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere1_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 0; z : 210; }";
+        };
+    },
+    {
+        id : "sphere1_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 90; y : 90; z : 90; }";
+        };
+    },
+    {
+        id : "skybox_rotate";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 1.5; y : 3.14; z : 0; }";
+        };
+    },
+    {
+        id : "skybox_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 800; y : 800; z : 800; }";
+        };
+    },
+    {
+        id : "sphere_rotate";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : -1.5; y : 3.14; z : 0; }";
+        };
+    },
+    {
+        id : "texture";
+        type : "materials_texture.so";
+        properties : {
+            texture : "config_files/img.png";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "texture";
+                children : (
+                    {
+                        id : "sphere1_translate";
+                        children : (
+                            {
+                                id : "sphere1_scale";
+                                children : (
+                                    {
+                                        id : "sphere_rotate";
+                                        children : (
+                                            { id : "sphere1"; }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+background : (
+    {
+        r : 0;
+        g : 0;
+        b : 0;
+    }
+);
+
+image : (
+    {
+        file : "planets.ppm";
+        width : 1000;
+        height : 1000;
+    }
+);

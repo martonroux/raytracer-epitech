@@ -1,0 +1,190 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 120; g : 120; b : 120; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "1000";
+            height : "1000";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+        };
+    },
+    {
+        id : "skybox_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 800; y : 800; z : 800; }";
+        };
+    },
+    {
+        id : "dragon_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 2; y : 2; z : 2; }";
+        };
+    },
+    {
+        id : "skybox_rotate";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 1.57; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "dragon_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 0; z : -300; }";
+        };
+    },
+    {
+        id : "dragon_rotate";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : -1.57; y : 2.9; z : 0; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 150; y : -300; z : -300; }";
+        };
+    },
+    {
+        id : "plane_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : 300; z : 0; }";
+        };
+    },
+    {
+        id : "glass_material";
+        type : "materials_glass.so";
+        properties : {
+            color : "{ r : 0; g : 250; b : 154; }";
+            transparency : "0.8";
+        };
+    },
+    {
+        id : "skybox_texture";
+        type : "materials_texture.so";
+        properties : {
+            texture : "config_files/img_2.png";
+            skybox : "true";
+        };
+    },
+    {
+        id : "reflective";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 50; g : 50; b : 50; }";
+            shadow_quality : "20";
+            ambiant_occlusion : "0";
+            roughness : "1";
+        };
+    },
+    {
+        id: "skybox",
+        type: "shapes_skybox.so",
+        properties: {
+        }
+    },
+    {
+        id: "dragon",
+        type: "shapes_object.so",
+        properties: {
+            path: "config_files/obj/dragon/dragon_low_poly_3.obj";
+        }
+    },
+    {
+        id: "plane",
+        type: "shapes_plane.so",
+        properties: {
+        }
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "skybox_texture";
+                children : (
+                    {
+                        id : "skybox_rotate";
+                        children : (
+                            {
+                                id : "skybox_scale";
+                                children : (
+                                    { id : "skybox"; }
+                                );
+                            }
+                        );
+                    }
+                );
+            },
+            {
+                id : "glass_material";
+                children : (
+                    {
+                        id : "dragon_translate";
+                        children : (
+                            {
+                                id : "dragon_rotate";
+                                children : (
+                                    {
+                                        id : "dragon_scale";
+                                        children : (
+                                            { id : "dragon"; }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            },
+            {
+                id : "reflective";
+                children : (
+                    {
+                        id : "plane_translate";
+                        children : (
+                            { id : "plane"; }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+image : (
+    {
+        file : "piano.ppm";
+        width : 1000;
+        height : 1000;
+    }
+);

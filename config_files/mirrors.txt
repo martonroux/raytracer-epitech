@@ -1,0 +1,280 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 0; g : 0; b : 0; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "800";
+            height : "800";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_directional.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }"
+            direction : "{ x : -1; y : 1; z : 1; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 50; y : -100; z : -200; }";
+        };
+    },
+    {
+        id : "sphere1";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere2";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere3";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "plane1";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "plane2";
+        type : "shapes_plane.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere1_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -100; y : 0; z : 200; }";
+        };
+    },
+    {
+        id : "sphere2_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 100; y : 0; z : 150; }";
+        };
+    },
+    {
+        id : "sphere3_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : -150; z : 350; }";
+        };
+    },
+    {
+        id : "plane1_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -700; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "plane2_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 2000; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "sphere1_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere2_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere3_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "plane1_rotateZ";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : 0; z : 1.57; }";
+        };
+    },
+    {
+        id : "plane1_rotateY";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : -1; z : 0; }";
+        };
+    },
+    {
+        id : "plane2_rotateZ";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : 0; z : 1.57; }";
+        };
+    },
+    {
+        id : "plane2_rotateY";
+        type : "transformations_rotation.so";
+        properties : {
+            rotation : "{ x : 0; y : 1; z : 0; }";
+        };
+    },
+    {
+        id : "red_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 0; b : 255; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "0";
+        };
+    },
+    {
+        id : "blue_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 0; g : 255; b : 0; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "0.5";
+        };
+    },
+    {
+        id : "white_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "1";
+        };
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "red_material";
+                children : (
+                    {
+                        id : "sphere2_translate";
+                        children : (
+                            {
+                                id : "sphere2_scale";
+                                children : (
+                                    { id : "sphere2"; }
+                                );
+                            }
+                        );
+                    },
+                );
+            },
+            {
+                id : "blue_material";
+                children : (
+                    {
+                        id : "sphere1_translate";
+                        children : (
+                            {
+                                id : "sphere1_scale";
+                                children : (
+                                    { id : "sphere1"; }
+                                );
+                            }
+                        );
+                    }
+                );
+            },
+            {
+                id : "white_material";
+                children : (
+                    {
+                        id : "sphere3_translate";
+                        children : (
+                            {
+                                id : "sphere3_scale";
+                                children : (
+                                    { id : "sphere3"; }
+                                );
+                            }
+                        );
+                    },
+                    {
+                        id : "plane1_translate";
+                        children : (
+                            {
+                                id : "plane1_rotateY";
+                                children : (
+                                    {
+                                        id : "plane1_rotateZ";
+                                        children : (
+                                            { id : "plane1"; }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    },
+                    {
+                        id : "plane2_translate";
+                        children : (
+                            {
+                                id : "plane2_rotateY";
+                                children : (
+                                    {
+                                        id : "plane2_rotateZ";
+                                        children : (
+                                            { id : "plane2"; }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+image : (
+    {
+        file : "mirrors.ppm";
+        width : 1000;
+        height : 1000;
+    }
+);

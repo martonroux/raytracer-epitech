@@ -1,0 +1,240 @@
+nodes : (
+    {
+        id : "scene";
+        type : "scenes_base.so";
+        properties : {
+            background_color : "{ r : 150; g : 150; b : 150; }";
+        };
+    },
+    {
+        id : "camera";
+        type : "cameras_base.so";
+        properties : {
+            fieldOfView : "75";
+            width : "400";
+            height : "400";
+        };
+    },
+    {
+        id : "light";
+        type : "lights_point.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+        };
+    },
+    {
+        id : "light_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 50; y : -100; z : -200; }";
+        };
+    },
+    {
+        id : "sphere1";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere2";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere3";
+        type : "shapes_sphere.so";
+        properties : {
+        };
+    },
+    {
+        id : "sphere1_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : -100; y : 0; z : 0; }";
+        };
+    },
+    {
+        id : "sphere2_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 100; y : 0; z : 200; }";
+        };
+    },
+    {
+        id : "sphere3_translate";
+        type : "transformations_translation.so";
+        properties : {
+            translation : "{ x : 0; y : -150; z : 150; }";
+        };
+    },
+    {
+        id : "sphere1_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere2_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "sphere3_scale";
+        type : "transformations_scale.so";
+        properties : {
+            scale : "{ x : 60; y : 60; z : 60; }";
+        };
+    },
+    {
+        id : "red_material";
+        type : "materials_basic.so";
+        properties : {
+            color : "{ r : 255; g : 0; b : 255; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "0";
+        };
+    },
+    {
+        id : "blue_material";
+        type : "materials_chessboard.so";
+        properties : {
+            color : "{ r : 0; g : 255; b : 0; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "0.5";
+            chess_size : "60";
+            min_chess : "0";
+            max_chess : "1";
+        };
+    },
+    {
+        id : "white_material";
+        type : "materials_perlin.so";
+        properties : {
+            color : "{ r : 255; g : 255; b : 255; }";
+            shadow_quality : "1";
+            ambiant_occlusion : "0";
+            roughness : "0";
+            octaves : "5";
+            persistence : "5";
+            min_perlin : "0.75";
+            max_perlin : "1";
+        };
+    },
+    {
+        id: "triangle1",
+        type: "shapes_triangle.so",
+        properties: {
+            p1: "-200,1,0";
+            p2: "200,0,0";
+            p3: "50,20,-100";
+        }
+    },
+    {
+        id: "object1",
+        type: "shapes_object.so",
+        properties: {
+            path: "config_files/obj.obj";
+        }
+    },
+    {
+        id: "object2",
+        type: "shapes_object.so",
+        properties: {
+            path: "config_files/obj2.obj";
+        }
+    },
+    {
+        id: "rotation",
+        type: "transformations_rotation.so",
+        properties: {
+            rotation: "{ x : 0; y : 1; z : 1 }";
+        }
+    }
+);
+
+config : (
+    {
+        id : "scene";
+        children : (
+            { id : "camera"; },
+            {
+                id : "light_translate";
+                children : (
+                    { id : "light"; }
+                );
+            },
+            {
+                id : "red_material";
+                children : (
+                    {
+                        id : "sphere2_translate";
+                        children : (
+                            {
+                                id : "sphere2_scale";
+                                children : (
+                                    {
+                                        id: "rotation";
+                                        children: (
+                                            { id : "object1";}
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    },
+                    { id : "triangle1"; }
+                );
+            },
+            {
+                id : "blue_material";
+                children : (
+                    {
+                        id : "sphere1_translate";
+                        children : (
+                            {
+                                id : "sphere1_scale";
+                                children : (
+
+                                    { id : "sphere1"; }
+                                );
+                            }
+                        );
+                    }
+                );
+            },
+            {
+                id : "white_material";
+                children : (
+                    {
+                        id : "sphere3_translate";
+                        children : (
+                            {
+                                id : "sphere3_scale";
+                                children : (
+                                    { id : "object2"; }
+                                );
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
+
+image : (
+    {
+        file : "reflection.ppm";
+        width : 2048;
+        height : 2048;
+        pallet : "pallet/pear36.pal";
+        filter : "dark_blue";
+        antiAliasing : 2;
+    }
+);
